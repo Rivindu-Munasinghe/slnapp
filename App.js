@@ -15,14 +15,30 @@ import SelectScreen from './app/Screens/SelectScreen';
 import CustReg from './app/Screens/CustReg';
 import MerchantReg from './app/Screens/MerchantReg';
 import ShopReg from './app/Screens/ShopReg';
+import * as firebase from "firebase";
+
 
 const AppStack= createStackNavigator();
+
+var firebaseConfig = {
+  apiKey: "AIzaSyBN5rQvDWZrir9UmnHW_FSEo6LjLU2rKBg",
+  authDomain: "firstapp-b1180.firebaseapp.com",
+  projectId: "firstapp-b1180",
+  storageBucket: "firstapp-b1180.appspot.com",
+  messagingSenderId: "521733710161",
+  appId: "1:521733710161:web:0a2cc4ce522fadd1cc3370"
+};
+
+// Initialize Firebase
+const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 const App=()=>{
   return (
     <NavigationContainer>
-      <AppStack.Navigator
-       headerMode="none">
+      <StatusBar style="dark"/>
+      <AppStack.Navigator screenOptions={{
+        headerShown: false
+      }}>
           <AppStack.Screen name="WelcomeScreen" component={WelcomeScreen}/>
           <AppStack.Screen name="Login" component={Login}/>
           <AppStack.Screen name="SelectScreen" component={SelectScreen}/>

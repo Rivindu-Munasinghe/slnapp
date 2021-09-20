@@ -3,6 +3,7 @@ import React from 'react';
 import { ImageBackground,StyleSheet,Image,Text,StatusBar,TouchableOpacity,Button} from 'react-native';
 import * as Font from 'expo-font';
 import Login from './LoginScreen';
+import * as firebase from "firebase";
 
 
 const WelcomeScreen=({navigation})=>{
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
       marginVertical:10,
       marginHorizontal:10,
       position:'absolute',
-      top:'85%',
+      top:'88%',
       left:'40%',
     },
 })

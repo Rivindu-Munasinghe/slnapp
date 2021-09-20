@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { 
   ActivityIndicatorBase,
   StyleSheet, 
@@ -11,8 +11,17 @@ import {
   ImageBackground,
   ScrollView
 } from 'react-native';
+import * as firebase from "firebase";
+import LoginScreen from './LoginScreen';
+import { AuthContext } from '../navigation/AuthProvider';
 
 const CustReg=({navigation})=>{
+
+      const[email,setEmail]=useState();
+      const[password,setPassword]=useState();
+    
+      const { register } = useContext(AuthContext);
+
     return (
       <ImageBackground style={styles.container}
         source={require('../assets/bg-01.png')}>
@@ -21,40 +30,76 @@ const CustReg=({navigation})=>{
             style={{width:28, height:28,position:'absolute',top:"10%",left:"-45%",}}
             source={require('../assets/back.png')}
             onPress={() => navigation.navigate("SelectScreen")}
-          />
+          />          
         </TouchableOpacity>
+
         <Text style={styles.header}>Register as Customer</Text>
         <Image
           style={{width:105, height:111, top:'2%'}}
           source={require('../assets/pic.png')}/>
-        <TextInput style={styles.textinput1} placeholder="First Name" 
-        underlineColorAndroid={'transparent'}/>
-        <TextInput style={styles.textinput2} placeholder="Last Name" 
-        underlineColorAndroid={'transparent'}/>
-        <TextInput style={styles.textinput} placeholder="Email" 
-        underlineColorAndroid={'transparent'}/>
-        <TextInput style={styles.textinput3} placeholder="Gender" 
-        underlineColorAndroid={'transparent'}/>
-        <TextInput style={styles.textinput4} placeholder="Birthday" 
-        underlineColorAndroid={'transparent'}/>
-        <TextInput style={styles.textinput5} placeholder="Mobile Number" 
-        underlineColorAndroid={'transparent'}/>
-        <TextInput style={styles.textinput5} placeholder="Address" 
-        underlineColorAndroid={'transparent'}/>
-        <TextInput style={styles.textinput5} placeholder="Password" 
-        underlineColorAndroid={'transparent'} secureTextEntry/>
-        <TextInput style={styles.textinput5} placeholder=" Confirm Password" 
-        underlineColorAndroid={'transparent'} secureTextEntry/>
+        <TextInput style={styles.textinput1} 
+        placeholder="First Name" 
+        underlineColorAndroid={'transparent'}
+        />
+
+        <TextInput style={styles.textinput2}
+        placeholder="Last Name" 
+        underlineColorAndroid={'transparent'}
+        />
+
+        <TextInput style={styles.textinput} 
+       labelValue={email}
+       onChangeText={(userEmail)=>setEmail(userEmail)}
+       placeholderText="Email"
+       keyboardType="email-address"
+       autoCapitalize="none"
+       autoCorrect={false}
+        />
+        
+        <TextInput style={styles.textinput3} 
+        placeholder="Gender" 
+        underlineColorAndroid={'transparent'}
+        />
+        
+        <TextInput style={styles.textinput4} 
+        placeholder="Birthday" 
+        underlineColorAndroid={'transparent'}
+        />
+        
+        <TextInput style={styles.textinput5} 
+        placeholder="Mobile Number" 
+        underlineColorAndroid={'transparent'}
+        />
+        
+        <TextInput style={styles.textinput5} 
+        placeholder="Address" 
+        underlineColorAndroid={'transparent'}
+        />
+        
+        <TextInput style={styles.textinput5} 
+        labelValue={password}
+        onChangeText={(userPassword)=>setPassword(userPassword)}
+        placeholderText="Password"
+        secureTextEntry={true}
+        />
+        
+        <TextInput style={styles.textinput5} 
+        placeholder=" Confirm Password" 
+        underlineColorAndroid={'transparent'} 
+        secureTextEntry
+        />
+        
         <TouchableOpacity style={styles.button}>
             <Text style={styles.btnTxt}>
                 Sign Up
             </Text>
+            onPress={() => register(email, password)}
         </TouchableOpacity>
       </ImageBackground>
     );
   }
 
-export default CustReg;
+  export default CustReg;
 
   const styles = StyleSheet.create({
     container: {
